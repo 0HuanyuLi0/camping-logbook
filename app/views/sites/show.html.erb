@@ -1,0 +1,80 @@
+
+
+<h2><%= @site.name %></h2>
+
+<%= link_to "Edit", edit_site_path(@site) %>
+|
+<%= link_to "Delete", site_path(@site.id), method:'delete' %>
+<br>
+
+<div class="site_info">
+    <strong>Name:</strong>
+    <p><%= @site.name %></p>
+</div>
+
+<div class="site_info">
+    <strong>Location:</strong>
+    <p><%= @site.location %></p>
+</div>
+
+<div class="site_info">
+    <strong>Coordinates:</strong>
+    <p><%= @site.coordinates %></p>
+</div>
+
+<div class="site_info">
+    <strong>Price:</strong>
+    <p><%= @site.price == 0 ? 'FREE' : "$ #{@site.price}" %></p>
+</div>
+
+<div class="site_info">
+    <strong>Link:</strong>
+    <p> <%= link_to @site.link, @site.link %></p>
+</div>
+
+<div class="site_info">
+    <strong>Powered Site:</strong>
+    <p><%= @site.powered ? 'Yes' : 'No' %></p>
+</div>
+
+<div class="site_info">
+    <strong>Pets Allowed:</strong>
+    <p><%= @site.pets ? 'Yes' : 'No' %></p>
+</div>
+
+<div class="site_info">
+    <strong>Description:</strong>
+    <p><%= @site.description %></p>
+</div>
+
+
+<% if @site.photos.length > 0 %>
+
+    <div class="site_info">
+        <strong>Photos:</strong>
+        <ul>
+            <% @site.photos.each do |photo|%>
+                <li><%= image_tag photo.link, alt:photo.name, class:"site_photo"%></li>
+            <% end %>
+        </ul>
+    </div>
+
+<% end %>
+
+<% if @site.reviews.length > 0 %>
+
+    <div class="site_info">
+        <strong>Reviews:</strong>
+        <ul>
+            <% @site.reviews.each do |review|%>
+                <li>
+                Score: <%= review.score %>
+                <br>
+                Comment: <%= review.comment %>
+                </li>
+            <% end %>
+        </ul>
+    </div>
+
+<% end %>
+

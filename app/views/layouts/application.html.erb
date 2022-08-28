@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CampingLogbook</title>
+    <title>Camping Logbook</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,26 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <h1>Camping Logbook</h1>
+      <nav>
+      <%= link_to "Home", root_path %>
+      |
+      <%= link_to "All Camping sites", sites_path %>
+      |
+      <%= link_to "Add Camping sites", new_site_path %>
+      </nav>
+      <hr>
+    </header>
+    
+    <main>
+      <%= yield %>
+    </main>
+
+    <footer>
+      <hr>
+      &copy; Camping Fans Productions 2022
+    </footer>
+
   </body>
 </html>

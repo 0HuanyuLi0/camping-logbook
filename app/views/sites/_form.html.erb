@@ -1,0 +1,67 @@
+
+<%= form_for @site, local: true do |f| %>
+
+<div class="site_form">
+    <%= f.label :name %>
+    <br>
+    <%= f.text_field :name %>
+    <br><br>
+</div>
+
+<div class="site_form">
+    <%= f.label :location %>
+    <br>
+    <%= f.text_field :location %>
+    <br><br>
+</div>
+
+<div class="site_form">
+    <%= f.label :coordinates %>
+    <br>
+    <%= f.text_field :coordinates %>
+    <br><br>
+</div>
+
+<div class="site_form">
+    <%= f.label :price %>
+    <br>
+    <%= f.number_field :price %>
+    <br><br>
+</div>
+
+<div class="site_form">
+    <%= f.label :link %>
+    <br>
+    <%= f.number_field :link %>
+    <br><br>
+</div>
+
+<div class="site_form">
+    <%= f.label :powered %>
+    <br>
+    <%= f.select :powered, [["Yes",true],["No",false]],selected:false %>
+    <br><br>
+</div>
+
+<div class="site_form">
+    <%= f.label :pets, "Pets Allowed" %>
+    <br>
+    <%= f.select :pets, [["Yes",true],["No",false]],selected:false %>
+    <br><br>
+</div>
+
+<div class="site_form">
+    <%= f.label :description %>
+    <br>
+    <%= f.text_area :description %>
+    <br><br>
+</div>
+
+<%= f.fields_for :photos do |ff|%>
+    <%= render 'photo', ff:ff %>
+<% end %>
+
+<%= f.submit %>
+
+<% end %>
+

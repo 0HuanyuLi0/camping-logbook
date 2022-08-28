@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyText
+  date: 2022-08-28
+  link: MyText
+
+two:
+  name: MyText
+  date: 2022-08-28
+  link: MyText

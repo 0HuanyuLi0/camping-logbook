@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyText
+  location: MyText
+  coordinates: MyText
+  price: 9.99
+  link: MyText
+  powered: false
+  pets: false
+  description: MyText
+
+two:
+  name: MyText
+  location: MyText
+  coordinates: MyText
+  price: 9.99
+  link: MyText
+  powered: false
+  pets: false
+  description: MyText
