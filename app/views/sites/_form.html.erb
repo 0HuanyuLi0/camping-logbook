@@ -4,7 +4,7 @@
 <div class="site_form">
     <%= f.label :name %>
     <br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :required=>true %>
     <br><br>
 </div>
 
@@ -57,10 +57,20 @@
     <br><br>
 </div>
 
+<div id="photo_link">
+    <button>
+        Add Photo link
+    </button>
+</div>
+<!--
 <%= f.fields_for :photos do |ff|%>
     <%= render 'photo', ff:ff %>
 <% end %>
 
+<%= f.fields_for :reviews do |ff|%>
+    <%= render 'review', ff:ff %>
+<% end %>
+-->
 <%= f.submit %>
 
 <% end %>
