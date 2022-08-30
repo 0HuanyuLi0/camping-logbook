@@ -38,6 +38,7 @@ class ListsController < ApplicationController
   def show
     @list = List.find params[:id]
     @photo = Photo.new
+    @story = Story.new
   end
 
   def edit

@@ -9,5 +9,6 @@ class User < ApplicationRecord
     has_many :lists,:dependent => :destroy
     has_many :photos,:dependent => :destroy
     has_many :reviews,:dependent => :destroy
+    has_many :stories,:dependent => :destroy
 
 end

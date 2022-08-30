@@ -164,4 +164,20 @@ Review.create!(
     user_id: u1.id
 )
 
+# ====================
+Story.destroy_all
+
+Story.create!(
+    title:"test",
+    content:"Gooooooooood",
+    site_id:mt_wilson.id,
+    user_id: u1.id
+)
+
+Story.create!(
+    title:"test1",
+    content:"Gooooooooood1",
+    list_id:l1.id
+)
+
 

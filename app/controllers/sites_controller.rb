@@ -40,6 +40,7 @@ class SitesController < ApplicationController
     @site = Site.find params[:id]
     @reviews = Review.new
     @photo = Photo.new
+    @story = Story.new
   end
 
   def edit
