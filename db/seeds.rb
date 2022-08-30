@@ -16,7 +16,7 @@ port_lincoln = Site.create!(
     link:'https://www.portlincolntouristpark.com.au/',
     powered:true,
     pets:true,
-    description:"We have a wide range of both powered and unpowered campsites to choose from, most with outstanding views of Boston Bay. There is plenty to do whilst staying at Port Lincoln Tourist Park – enjoy free WIFI, access to our boat ramp, jetty and beach as well as the Parnkalla Walking Trail."
+    description:"We have a wide range of both powered and unpowered campsites to choose from, most with outstanding views of Boston Bay. There is plenty to do whilst staying at Port Lincoln Tourist Park - enjoy free WIFI, access to our boat ramp, jetty and beach as well as the Parnkalla Walking Trail."
 )
 
 west_beach = Site.create!(
@@ -129,3 +129,24 @@ u3 = User.create!(
     email:'admin.com',
     password:'abc'
 )
+
+# =====================
+List.destroy_all
+
+l1 = List.create!(
+    title:'Favorite',
+    note:'hahaha',
+    user_id:u3.id
+)
+
+l2 = List.create!(
+    title:'Visted',
+    note:'hahaha',
+    user_id:u3.id
+)
+
+#=====================
+
+l1.sites << west_beach << port_lincoln
+
+l2.sites << west_beach << port_lincoln << mt_wilson

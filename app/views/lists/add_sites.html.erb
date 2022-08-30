@@ -1,0 +1,22 @@
+
+
+<h2>Add Sites to List: <%= @list.title %></h2>
+
+<%= form_with url:add_sites_path, local:true do |f| %>
+
+
+    <ul>
+        <% Site.all.each do |site|  %>
+
+        <li>
+            <%= check_box_tag "sites_name[]", site.id %>
+            <%= label_tag "#{site.name}"  %>
+        
+        </li>
+        <% end %>
+    
+    </ul>
+
+        <%= f.submit %>
+
+<% end %>

@@ -1,0 +1,21 @@
+
+
+<%= form_with model:@list, local: true do |f| %>
+
+<div>
+    <%= f.label :title %>
+    <br>
+    <%= f.text_field :title %>
+    <br><br>
+</div>
+
+<div>
+    <%= f.label :note %>
+    <br>
+    <%= f.text_area :note %>
+    <br><br>
+</div>
+
+<%= f.submit %>
+
+<% end %>
