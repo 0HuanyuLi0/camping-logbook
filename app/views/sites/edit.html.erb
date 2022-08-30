@@ -1,5 +1,19 @@
 
 <h2><%= @site.name %></h2>
 
+<% if @ph.present? && @ph.errors.any? %>
+    <strong style="color:red">Photo link already exists. Please add a new photo link.</strong>
+    <br><br>
+    <!--
+    <ul>
+        <% @ph.errors.full_messages.each do |e| %>
+            <li>
+                <%= e %>
+            </li>
+        <% end %>
+    </ul>
+    -->
+<% end %>
+
 <%= render 'form' %>
 

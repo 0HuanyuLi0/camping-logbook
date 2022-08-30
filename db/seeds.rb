@@ -108,3 +108,24 @@ Review.create!(
     comment:"Goooooood",
     site_id:mt_wilson.id
 )
+
+# =======================
+User.destroy_all
+
+u1 = User.create!(
+    name:'luke',
+    email:'luke.com',
+    password:'abc'
+)
+
+u2 = User.create!(
+    name:'like',
+    email:'like.com',
+    password:'abc'
+)
+
+u3 = User.create!(
+    name:'admin',
+    email:'admin.com',
+    password:'abc'
+)

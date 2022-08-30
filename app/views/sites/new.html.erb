@@ -2,4 +2,15 @@
 
 <h1>Add New Camping Site</h1>
 
+<% if @site.errors.any? %>
+    <strong>Please correct the following errors:</strong>
+    <ul>
+        <% @site.errors.full_messages.each do |e| %>
+            <li>
+                <%= e %>
+            </li>
+        <% end %>
+    </ul>
+<% end %>
+
 <%= render :partial => 'form' %>

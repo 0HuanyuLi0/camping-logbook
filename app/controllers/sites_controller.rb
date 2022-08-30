@@ -1,22 +1,31 @@
 class SitesController < ApplicationController
 
+  before_action :check_if_logged_in, only:[:edit, :update, :destroy]
+
   def new
     @site = Site.new
-
-    3.times do
-      @site.photos.build
-    end
-
-      @site.reviews.build
-
   end
 
   def create
-    
-    @site = Site.new site_params
-    if @site.save
-    redirect_to @site
+
+    @site = Site.create site_params
+
+
+    if params[:photo_links].present?
+      params[:photo_links].each do |link|
+        Photo.create(
+          link:link,
+          site_id:@site.id
+        )
+      end
     end
+
+    if @site.persisted?
+      redirect_to @site
+    else
+      render :new
+    end
+
 
   end
 
@@ -30,18 +39,51 @@ class SitesController < ApplicationController
 
   def edit
     @site = Site.find params[:id]
-    @site.photos.build
-    if @site.reviews.empty?
-      @site.reviews.build
-    end
+   
   end
 
   def update
-    site = Site.find params[:id]
-    site.photos.destroy_all
-    site.reviews.destroy_all
-    site.update site_params
-    redirect_to site_path(site)
+   
+    @site = Site.find params[:id]
+
+    @site.update site_params
+
+    if params[:photos].present?
+      # raise "hell"
+      params[:photos].keys.each do |key|
+          p = Photo.find_by id: key
+          if params[:photos][key].present?
+            p.update(
+              link: params[:photos][key]
+            )
+          else
+            p.destroy
+          end
+      end
+    end
+
+    if params[:photo_links].present?
+      # raise "hell"
+      params[:photo_links].each do |p_link|
+        @ph = Photo.create(
+          link:p_link,
+          site_id:@site.id
+        )
+
+        unless @ph.persisted?
+          return render :edit
+        end
+
+      end
+    end
+
+    Photo.where(link:nil).destroy_all
+
+    if @site.persisted?
+      redirect_to @site
+    else
+      render :new
+    end
   end
 
   def destroy
@@ -52,7 +94,7 @@ class SitesController < ApplicationController
 
   private
   def site_params
-    params.require(:site).permit(:name,:location,:coordinates,:price,:link,:powered,:pets,:description,photos_attributes: [:link], reviews_attributes: [:score,:comment])
+    params.require(:site).permit(:name,:location,:coordinates,:price,:link,:powered,:pets,:description)
   end
 
 end

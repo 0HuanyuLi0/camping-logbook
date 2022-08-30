@@ -1,4 +1,7 @@
-class PhotosController < ApplicationController
+class ListsController < ApplicationController
+  
+  before_action :check_if_logged_in
+
   def new
   end
 
@@ -18,6 +21,9 @@ class PhotosController < ApplicationController
   end
 
   def destroy
-    
   end
+
+  
+  
+
 end

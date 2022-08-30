@@ -1,5 +1,5 @@
 
-<%= form_for @site, local: true do |f| %>
+<%= form_with model:@site, local: true do |f| %>
 
 <div class="site_form">
     <%= f.label :name %>
@@ -32,7 +32,7 @@
 <div class="site_form">
     <%= f.label :link %>
     <br>
-    <%= f.number_field :link %>
+    <%= f.text_field :link %>
     <br><br>
 </div>
 
@@ -57,11 +57,30 @@
     <br><br>
 </div>
 
+<% if @site.photos.length > 0 %>
+
+   <% @site.photos.each do |photo| %>
+        <%= label_tag "Photo Link" %>
+        <br>
+        <%= text_field_tag "photos[#{photo.id}]", photo.link %>
+        <br><br>
+   <% end %>
+  
+<% end %>
+
+
 <div id="photo_link">
-    <button>
+<br>
+    <button type="button">
         Add Photo link
     </button>
 </div>
+
+   
+
+
+<br><br>
+
 <!--
 <%= f.fields_for :photos do |ff|%>
     <%= render 'photo', ff:ff %>

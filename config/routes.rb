@@ -2,5 +2,13 @@ Rails.application.routes.draw do
   
 
   root to: 'pages#home'
-  resources :sites, :photos, :reviews
+
+  get '/login' => 'session#new'
+  post '/login' => 'session#create'
+  delete '/login' => 'session#destroy'
+
+  resources :sites, :photos, :reviews, :lists, :users
+
+
+
 end
