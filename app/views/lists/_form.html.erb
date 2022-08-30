@@ -16,6 +16,18 @@
     <br><br>
 </div>
 
+
+<ul>
+    <% Site.all.each do |site|  %>
+
+    <li>
+        <%= check_box_tag "sites_name[]", site.id, @list.sites.include?(site) %>
+        <%= label_tag "#{site.name}"  %>
+    </li>
+    <% end %>
+    
+</ul>
+
 <%= f.submit %>
 
 <% end %>

@@ -1,6 +1,8 @@
 class SitesController < ApplicationController
 
-  before_action :check_if_logged_in, only:[:edit, :update, :destroy]
+  before_action :check_if_admin, only:[:edit, :update, :destroy]
+
+
 
   def new
     @site = Site.new

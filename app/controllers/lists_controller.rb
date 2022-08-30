@@ -7,14 +7,26 @@ class ListsController < ApplicationController
   end
 
   def create
+    
     @list = List.new list_params
     @list.user_id = @current_user.id
+
+    if params[:sites_name].present?
+      
+      params[:sites_name].each do |site|
+        @list.sites << Site.find_by(id:site)
+      end
+
+    end
+
+
     
     if @list.save
       redirect_to @list
     else
       render :new
     end
+
   end
 
   def index
@@ -32,6 +44,29 @@ class ListsController < ApplicationController
   end
 
   def update
+
+    @list = List.find params[:id]
+
+    @list.update list_params
+
+   
+    @list.sites.destroy_all
+
+    if params[:sites_name].present?
+      
+      params[:sites_name].each do |site|
+        @list.sites << Site.find_by(id:site)
+      end
+
+    end
+
+    if @list.persisted?
+      redirect_to @list
+    else
+      render :new
+    end
+
+
   end
 
   def destroy
@@ -39,25 +74,7 @@ class ListsController < ApplicationController
     redirect_to lists_path
   end
 
-  def add_sites
-    @list = List.find params[:id]
-  end
 
-  def add_sites_post
-    @list = List.find params[:id]
-
-    if params[:sites_name].present?
-      params[:sites_name].each do |par|
-
-        site = Site.find_by(id:par)
-        @list.sites << site
-
-      end
-    end
-    redirect_to list_path @list
-
-
-  end
 
   private
   def list_params

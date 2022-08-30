@@ -9,8 +9,4 @@ Rails.application.routes.draw do
 
   resources :sites, :photos, :reviews, :lists, :users
 
-  get '/lists/:id/add_sites' => 'lists#add_sites', as:'add_sites' 
-
-  post '/lists/:id/add_sites' => 'lists#add_sites_post'
-
 end

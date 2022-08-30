@@ -2,7 +2,7 @@
 
 <h2><%= @site.name %></h2>
 
-<% if @current_user.present? %>
+<% if @current_user.name == "admin" %>
 
     <%= link_to "Edit", edit_site_path(@site) %>
     |
@@ -84,4 +84,6 @@
     </div>
 
 <% end %>
+
+
 
