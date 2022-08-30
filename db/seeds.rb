@@ -48,66 +48,66 @@ Photo.create!(
     name:'Autumn',
     date:'2022/05/02',
     link:'mt/mt_wilson_1.png',
-    site_id:mt_wilson.id
+    site_id:mt_wilson.id,
+    isPublic:true
 )
 
 Photo.create!(
     name:'Spring',
     date:'2022/05/02',
     link:'mt/mt_wilson_2.png',
-    site_id:mt_wilson.id
+    site_id:mt_wilson.id,
+    isPublic:true
 )
 
 Photo.create!(
     name:'Autumn',
     date:'2022/05/02',
     link:'mt/mt_wilson_3.png',
-    site_id:mt_wilson.id
+    site_id:mt_wilson.id,
+    isPublic:true
 )
 
 Photo.create!(
     name:'Autumn',
     date:'2022/05/02',
     link:'mt/mt_wilson_4.png',
-    site_id:mt_wilson.id
+    site_id:mt_wilson.id,
+    isPublic:true
 )
 
 Photo.create!(
     name:'Autumn',
     date:'2022/05/02',
     link:'wt/wt_beach_1.png',
-    site_id:west_beach.id
+    site_id:west_beach.id,
+    isPublic:true
 )
 
 Photo.create!(
     name:'Autumn',
     date:'2022/05/02',
     link:'wt/wt_beach_2.png',
-    site_id:west_beach.id
+    site_id:west_beach.id,
+    isPublic:true
 )
 
 Photo.create!(
     name:'Autumn',
     date:'2022/05/02',
     link:'https://www.portlincolntouristpark.com.au/wp-content/uploads/2022/08/7D2A0265-scaled.jpg',
-    site_id:port_lincoln.id
+    site_id:port_lincoln.id,
+    isPublic:true
 )
 
 Photo.create!(
     name:'Autumn',
     date:'2022/05/02',
     link:'https://www.portlincolntouristpark.com.au/wp-content/uploads/2022/07/waterfrotn-section2-scaled.jpg',
-    site_id:port_lincoln.id
+    site_id:port_lincoln.id,
+    isPublic:true
 )
 
-# ====================
-Review.destroy_all
-
-Review.create!(
-    score:8.2,
-    comment:"Goooooood",
-    site_id:mt_wilson.id
-)
 
 # =======================
 User.destroy_all
@@ -115,19 +115,22 @@ User.destroy_all
 u1 = User.create!(
     name:'luke',
     email:'luke.com',
-    password:'abc'
+    password:'abc',
+    isAdmin:false
 )
 
 u2 = User.create!(
     name:'like',
     email:'like.com',
-    password:'abc'
+    password:'abc',
+    isAdmin:false
 )
 
 u3 = User.create!(
     name:'admin',
-    email:'admin.com',
-    password:'abc'
+    email:'admin',
+    password:'abc',
+    isAdmin:true
 )
 
 # =====================
@@ -150,3 +153,15 @@ l2 = List.create!(
 l1.sites << west_beach << port_lincoln
 
 l2.sites << west_beach << port_lincoln << mt_wilson
+
+# ====================
+Review.destroy_all
+
+Review.create!(
+    score:4.0,
+    comment:"Goooooood",
+    site_id:mt_wilson.id,
+    user_id: u1.id
+)
+
+

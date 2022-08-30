@@ -1,6 +1,7 @@
 class SitesController < ApplicationController
 
-  before_action :check_if_admin, only:[:edit, :update, :destroy]
+  before_action :check_if_logged_in, only:[:edit]
+  before_action :check_if_admin, only:[:destroy]
 
 
 
@@ -37,11 +38,14 @@ class SitesController < ApplicationController
 
   def show
     @site = Site.find params[:id]
+    @reviews = Review.new
+    @photo = Photo.new
   end
 
   def edit
     @site = Site.find params[:id]
-   
+    @is_admin = check_if_admin
+
   end
 
   def update
@@ -69,7 +73,8 @@ class SitesController < ApplicationController
       params[:photo_links].each do |p_link|
         @ph = Photo.create(
           link:p_link,
-          site_id:@site.id
+          site_id:@site.id,
+          user_id:@current_user.id
         )
 
         unless @ph.persisted?

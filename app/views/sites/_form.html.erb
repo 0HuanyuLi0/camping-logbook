@@ -4,56 +4,56 @@
 <div class="site_form">
     <%= f.label :name %>
     <br>
-    <%= f.text_field :name, :required=>true %>
+    <%= f.text_field :name, :required=>true, :disabled => @is_admin %>
     <br><br>
 </div>
 
 <div class="site_form">
     <%= f.label :location %>
     <br>
-    <%= f.text_field :location %>
+    <%= f.text_field :location,:disabled => @is_admin %>
     <br><br>
 </div>
 
 <div class="site_form">
     <%= f.label :coordinates %>
     <br>
-    <%= f.text_field :coordinates %>
+    <%= f.text_field :coordinates,:disabled => @is_admin %>
     <br><br>
 </div>
 
 <div class="site_form">
     <%= f.label :price %>
     <br>
-    <%= f.number_field :price %>
+    <%= f.number_field :price,:disabled => @is_admin %>
     <br><br>
 </div>
 
 <div class="site_form">
     <%= f.label :link %>
     <br>
-    <%= f.text_field :link %>
+    <%= f.text_field :link,:disabled => @is_admin %>
     <br><br>
 </div>
 
 <div class="site_form">
     <%= f.label :powered %>
     <br>
-    <%= f.select :powered, [["Yes",true],["No",false]],selected:false %>
+    <%= f.select :powered, [["Yes",true],["No",false]],selected:false,:disabled => @is_admin %>
     <br><br>
 </div>
 
 <div class="site_form">
     <%= f.label :pets, "Pets Allowed" %>
     <br>
-    <%= f.select :pets, [["Yes",true],["No",false]],selected:false %>
+    <%= f.select :pets, [["Yes",true],["No",false]],selected:false ,:disabled => @is_admin%>
     <br><br>
 </div>
 
 <div class="site_form">
     <%= f.label :description %>
     <br>
-    <%= f.text_area :description %>
+    <%= f.text_area :description ,:disabled => @is_admin%>
     <br><br>
 </div>
 
@@ -62,7 +62,7 @@
    <% @site.photos.each do |photo| %>
         <%= label_tag "Photo Link" %>
         <br>
-        <%= text_field_tag "photos[#{photo.id}]", photo.link %>
+        <%= text_field_tag "photos[#{photo.id}]", photo.link ,:disabled => @is_admin%>
         <br><br>
    <% end %>
   

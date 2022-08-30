@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_30_014354) do
+ActiveRecord::Schema.define(version: 2022_08_30_135806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,9 @@ ActiveRecord::Schema.define(version: 2022_08_30_014354) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "site_id"
+    t.integer "user_id"
+    t.boolean "isPublic"
+    t.integer "list_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -43,6 +46,7 @@ ActiveRecord::Schema.define(version: 2022_08_30_014354) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "site_id"
+    t.integer "user_id"
   end
 
   create_table "sites", force: :cascade do |t|
@@ -58,12 +62,22 @@ ActiveRecord::Schema.define(version: 2022_08_30_014354) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "stories", force: :cascade do |t|
+    t.text "title"
+    t.text "content"
+    t.integer "list_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.text "email"
     t.string "name"
     t.text "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "isAdmin"
   end
 
 end

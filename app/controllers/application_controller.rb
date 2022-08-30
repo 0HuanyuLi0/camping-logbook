@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
 
     def check_if_admin
         
-        unless @current_user.name == "admin"
+        unless @current_user.isAdmin
             flash[:error] = "Only admin can access here"
             redirect_to login_path
         end
