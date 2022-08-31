@@ -2,7 +2,7 @@
 
 <h2><%= @list.title %> List:</h2>
 <p>
-<%= @list.note %>
+<%= simple_format( @list.note) %>
 </p>
 
 <%= link_to "Edit", edit_list_path(@list.id)  %>

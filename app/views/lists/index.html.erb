@@ -9,7 +9,8 @@
     <li>
         <%= link_to list.title, list_path(list.id) %>
         <br>
-        <%= list.note %>
+
+        <%= simple_format(list.note) %>
         <% if @current_user.isAdmin %>
         <br>
         <%= link_to "Delete", list_path(list),method:"delete" %>

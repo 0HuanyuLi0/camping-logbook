@@ -57,7 +57,7 @@
 
 <div class="site_info">
     <strong>Description:</strong>
-    <p><%= @site.description %></p>
+    <p><%= simple_format(@site.description) %></p>
 </div>
 
 <% if @site.photos.present? %>
@@ -95,7 +95,7 @@
                 <br>
                 Score: <%= review.score %>
                 <br>
-                Comment: <%= review.comment %>
+                Comment: <%= simple_format(review.comment) %>
                 </li>
             <% end %>
         </ul>

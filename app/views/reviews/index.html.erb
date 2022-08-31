@@ -1,2 +1,16 @@
-<h1>Reviews#index</h1>
-<p>Find me in app/views/reviews/index.html.erb</p>
+
+
+<h2>All Reviews</h2>
+
+<ul>
+<% @reviews.each do |re|%>
+    Review for: 
+    <%= link_to re.site.name, review_path(re) %>
+    By:
+    <%= link_to re.user.email, user_path(re.user) %>
+
+   
+    <br>
+<% end %>
+
+</ul>

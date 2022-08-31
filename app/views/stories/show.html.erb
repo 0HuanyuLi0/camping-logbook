@@ -3,7 +3,7 @@ Title:
 <%= @story.title %>
 <br>
 Content:
-<%= @story.content %>
+<%= simple_format(@story.content) %>
 <br>
 
 <% if @story.list.present? %>

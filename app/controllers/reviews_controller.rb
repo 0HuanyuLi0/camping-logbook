@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :check_if_logged_in
+  before_action :check_if_admin, only:[:index,:show]
   def new
   end
 
@@ -18,9 +19,11 @@ class ReviewsController < ApplicationController
   end
 
   def index
+    @reviews = Review.all
   end
 
   def show
+    @review = Review.find params[:id]
   end
 
   def edit
@@ -38,9 +41,8 @@ class ReviewsController < ApplicationController
 
   def destroy
     @review = Review.find params[:id]
-    unless @review.user_id == @current_user.id
-      redirect_to site_path(@review.site_id)
-    end
+    check_is_owner(@review)
+    
     Review.destroy params[:id]
     redirect_to site_path(@review.site)
   end
