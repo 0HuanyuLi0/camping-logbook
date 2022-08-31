@@ -33,18 +33,28 @@
 
     <% @list.photos.each do |photo| %>
         <li>
-            <%= image_tag photo.link, class:"list_photo" %>
+            
+            <%= cl_image_tag(photo.link, :width => 600, :class => "list_photo") %>
+
             <%= link_to "Delete", photo_path(photo.id), method:"delete" %>
         </li>
     <% end %>
 <% end %>
 
-<%= form_with model:@photo, local:true do |f| %>
+<%= form_with model:@photo, local:true, html:{multipart:true}, id:"ff" do |f| %>
     <br>
     <%= hidden_field_tag "list_id", @list.id %>
    
-    <%= f.submit "Add Your Trip Photo"%>
-    <%= f.text_field :link, placeholder:"Photo Link" %>
+   
+  
+    <hr>
+    <h3>Add Your Trip Photos</h3>
+    <button type="button" id="upload">Select Photos</button>
+    <br><br>
+  
+
+    <%= f.submit "Upload"%>
+    <em>Select photos first, then click 'upload' button to submit form</em>
 <% end %>
 
 <%= render partial: 'story' %>

@@ -103,6 +103,38 @@ class SitesController < ApplicationController
     redirect_to sites_path
   end
 
+  def add_to_list
+    @site = Site.find params[:id]
+    @lists = List.where(user:@current_user)
+  end
+
+  def add_to_list_create
+
+    site = Site.find_by(id:params[:id])
+    lists_id = params[:lists]
+    
+    all_lists = List.where(user:@current_user)
+
+    all_lists.each do |l|
+      l.sites.destroy site
+    end
+
+    if lists_id.present?
+
+      lists_id.each do |list_id|
+        list = List.find_by(id:list_id)
+        check_is_owner(list)
+
+        unless list.sites.include?(site)
+          list.sites << site
+          list.save
+        end
+      end
+
+    end
+    redirect_to site_path(site)
+
+  end
 
   private
   def site_params

@@ -10,4 +10,8 @@ Rails.application.routes.draw do
 
   resources :sites, :photos, :reviews, :lists, :users, :stories
 
+  get '/sites/:id/add_to_list' => 'sites#add_to_list', as:'add_to_list'
+
+  post '/sites/:id/add_to_list' => 'sites#add_to_list_create'
+
 end

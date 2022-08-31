@@ -1,6 +1,8 @@
 
 
 <h2><%= @site.name %></h2>
+<%= link_to "Add to My List", add_to_list_path %>
+<br>
 <% if @site.user.present? %>
     <em>Created by: <%= @site.user.name %></em>
     <br>

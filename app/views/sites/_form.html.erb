@@ -1,5 +1,5 @@
 
-<%= form_with model:@site, local: true do |f| %>
+<%= form_with model:@site, local: true, html:{multipart:true} do |f| %>
 
 <div class="site_form">
     <%= f.label :name %>
@@ -72,11 +72,13 @@
 
 
 <br>
-<div id="photo_link">
-    <button type="button">
+
+<%= f.file_field :image %>
+
+<button type="button" id="upload_widget">
         Add Photo link
-    </button>
-</div>
+</button>
+
 
    
 <br><br>

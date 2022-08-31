@@ -7,21 +7,25 @@ class PhotosController < ApplicationController
   end
 
   def create
-
-    photo = Photo.new photo_params
-    photo.user_id = @current_user.id
-    photo.site_id = params[:site_id]
-    photo.list_id = params[:list_id]
-
-    if photo.save
-      if photo.list_id.present?
-        redirect_to list_path(photo.list_id)
-      else
-        redirect_to site_path(photo.site_id)
-      end
-    else 
-      render :new
+    
+    links = params[:cloud]
+    # raise
+    unless links.present?
+      return redirect_back(fallback_location: root_path)
     end
+
+    links.each do |lk|
+
+      photo = Photo.new
+      photo.link = lk
+      photo.user_id = @current_user.id
+      photo.site_id = params[:site_id]
+      photo.list_id = params[:list_id]
+      photo.save
+
+    end
+  
+      redirect_back(fallback_location: root_path)
 
   end
 
@@ -46,15 +50,8 @@ class PhotosController < ApplicationController
     list_id = photo.list_id
     Photo.destroy params[:id]
     
-    if list_id.present?
-      redirect_to list_path(list_id)
-    else
-      redirect_to site_path(site_id)
-    end
+    redirect_back(fallback_location: root_path)
+    
   end
 
-  private
-  def photo_params
-    params.require(:photo).permit(:link)
-  end
 end
