@@ -20,12 +20,17 @@
             </li>
         <% end %>
     </ul>
- 
 <% end %>
+
+
 <hr>
-<h4>Add New Story</h4>
+
+<input type="button" value="Add Private Trip Story" class="show_form" id="list_story_form">
+
+<div id="show_list_story_form" style="display:none">
 <%= form_with model:@story, local:true do |f| %>
 
+<h4>Add New Story</h4>
     <%= hidden_field_tag "list_id", @list.id %>
 
     <%= f.label :title %>
@@ -41,3 +46,5 @@
     <%= f.submit %>
 
 <% end %>
+
+</div>

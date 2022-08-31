@@ -12,6 +12,11 @@ $(function () {
             </div>`)
     })
 
+    $(".show_form").on("click",function(target){
+        $("#show_"+target.currentTarget.id).show()
+    })
+
 
 
 })
+

@@ -6,4 +6,5 @@ class Site < ApplicationRecord
     validates :name, length: {minimum:2}, uniqueness:true
 
     has_and_belongs_to_many :lists
+    belongs_to :user,optional: true
 end

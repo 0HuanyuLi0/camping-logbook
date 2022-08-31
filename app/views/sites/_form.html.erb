@@ -4,81 +4,81 @@
 <div class="site_form">
     <%= f.label :name %>
     <br>
-    <%= f.text_field :name, :required=>true, :disabled => @is_admin %>
+    <%= f.text_field :name, :required=>true %>
     <br><br>
 </div>
 
 <div class="site_form">
     <%= f.label :location %>
     <br>
-    <%= f.text_field :location,:disabled => @is_admin %>
+    <%= f.text_field :location %>
     <br><br>
 </div>
 
 <div class="site_form">
     <%= f.label :coordinates %>
     <br>
-    <%= f.text_field :coordinates,:disabled => @is_admin %>
+    <%= f.text_field :coordinates %>
     <br><br>
 </div>
 
 <div class="site_form">
     <%= f.label :price %>
     <br>
-    <%= f.number_field :price,:disabled => @is_admin %>
+    <%= f.number_field :price %>
     <br><br>
 </div>
 
 <div class="site_form">
     <%= f.label :link %>
     <br>
-    <%= f.text_field :link,:disabled => @is_admin %>
+    <%= f.text_field :link %>
     <br><br>
 </div>
 
 <div class="site_form">
     <%= f.label :powered %>
     <br>
-    <%= f.select :powered, [["Yes",true],["No",false]],selected:false,:disabled => @is_admin %>
+    <%= f.select :powered, [["Yes",true],["No",false]],selected:false %>
     <br><br>
 </div>
 
 <div class="site_form">
     <%= f.label :pets, "Pets Allowed" %>
     <br>
-    <%= f.select :pets, [["Yes",true],["No",false]],selected:false ,:disabled => @is_admin%>
+    <%= f.select :pets, [["Yes",true],["No",false]],selected:false %>
     <br><br>
 </div>
 
 <div class="site_form">
     <%= f.label :description %>
     <br>
-    <%= f.text_area :description ,:disabled => @is_admin%>
+    <%= f.text_area :description %>
     <br><br>
 </div>
 
-<% if @site.photos.length > 0 %>
+<% if @site.photos.present? %>
 
    <% @site.photos.each do |photo| %>
+        <% if photo.isPublic %>
         <%= label_tag "Photo Link" %>
         <br>
-        <%= text_field_tag "photos[#{photo.id}]", photo.link ,:disabled => @is_admin%>
+        <%= text_field_tag "photos[#{photo.id}]", photo.link %>
         <br><br>
+        <% end %>
    <% end %>
   
 <% end %>
 
 
-<div id="photo_link">
 <br>
+<div id="photo_link">
     <button type="button">
         Add Photo link
     </button>
 </div>
 
    
-
-
 <br><br>
 
 <%= f.submit %>

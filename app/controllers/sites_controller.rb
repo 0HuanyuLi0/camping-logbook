@@ -1,9 +1,7 @@
 class SitesController < ApplicationController
 
-  before_action :check_if_logged_in, only:[:edit]
+  before_action :check_if_logged_in, except:[:index,:show]
   before_action :check_if_admin, only:[:destroy]
-
-
 
   def new
     @site = Site.new
@@ -11,14 +9,16 @@ class SitesController < ApplicationController
 
   def create
 
-    @site = Site.create site_params
-
+    @site = Site.new site_params
+    @site.user_id = @current_user.id
+    @site.save
 
     if params[:photo_links].present?
       params[:photo_links].each do |link|
         Photo.create(
           link:link,
-          site_id:@site.id
+          site_id:@site.id,
+          isPublic:true
         )
       end
     end
@@ -45,15 +45,15 @@ class SitesController < ApplicationController
 
   def edit
     @site = Site.find params[:id]
-    @is_admin = check_if_admin
-
+    check_is_owner( @site )
   end
 
   def update
    
     @site = Site.find params[:id]
-
+    check_is_owner( @site )
     @site.update site_params
+    
 
     if params[:photos].present?
       # raise "hell"
@@ -61,7 +61,8 @@ class SitesController < ApplicationController
           p = Photo.find_by id: key
           if params[:photos][key].present?
             p.update(
-              link: params[:photos][key]
+              link: params[:photos][key],
+              isPublic:true
             )
           else
             p.destroy
@@ -75,7 +76,8 @@ class SitesController < ApplicationController
         @ph = Photo.create(
           link:p_link,
           site_id:@site.id,
-          user_id:@current_user.id
+          user_id:@current_user.id,
+          isPublic:true
         )
 
         unless @ph.persisted?
@@ -95,6 +97,8 @@ class SitesController < ApplicationController
   end
 
   def destroy
+    site = Site.find params[:id]
+    check_is_owner( site )
     Site.destroy params[:id]
     redirect_to sites_path
   end
@@ -104,5 +108,6 @@ class SitesController < ApplicationController
   def site_params
     params.require(:site).permit(:name,:location,:coordinates,:price,:link,:powered,:pets,:description)
   end
+
 
 end

@@ -1,2 +1,29 @@
-<h1>Photos#show</h1>
-<p>Find me in app/views/photos/show.html.erb</p>
+
+<h2>SHOW</h2>
+
+<%= link_to @photo.link,@photo.link %>
+<%= image_tag @photo.link %>
+<br>
+
+<% if @photo.user.present? %>
+User: <%= @photo.user.email%>
+<br>
+<% end %>
+
+<% if @photo.list.present? %>
+list: <%= @photo.list.title%>
+<br>
+<% end %>
+
+<% if @photo.site.present? %>
+site: <%= @photo.site.name%>
+<br>
+<% end %>
+
+
+isPublic: <%= @photo.isPublic%>
+<br>
+
+
+<br>
+<%= link_to "delete", photo_path(@photo) %>

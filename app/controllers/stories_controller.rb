@@ -1,4 +1,7 @@
 class StoriesController < ApplicationController
+
+  before_action :check_if_logged_in
+  before_action :check_if_admin,only:[:index,:show]
   def new
   end
 
@@ -18,9 +21,11 @@ class StoriesController < ApplicationController
   end
 
   def index
+    @stories = Story.all
   end
 
   def show
+    @story = Story.find params[:id]
   end
 
   def edit

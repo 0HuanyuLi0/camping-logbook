@@ -1,2 +1,12 @@
-<h1>Stories#index</h1>
-<p>Find me in app/views/stories/index.html.erb</p>
+
+<h2>All Stories</h2>
+
+<ul>
+
+    <% @stories.each do |story|%>
+        <li>
+            <%= link_to story.title,story_path(story)%>
+            [Created by: <%= story.user.email %>]
+        </li>
+    <% end %>
+</ul>

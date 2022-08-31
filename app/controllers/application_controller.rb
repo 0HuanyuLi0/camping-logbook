@@ -33,5 +33,12 @@ class ApplicationController < ActionController::Base
 
     end
 
+    def check_is_owner(position)
+
+        unless @current_user == position.user || @current_user.isAdmin
+            flash[:error]="You are not the owner" 
+            redirect_to login_path
+          end
+    end
 
 end

@@ -8,6 +8,10 @@
 <%= link_to "Edit", edit_list_path(@list.id)  %>
 |
 <%= link_to "Delete", list_path(@list.id),method:'delete' %>
+<% if @current_user.isAdmin %>
+|
+[Created by: <%= @list.user.email %>]
+<% end %>
 <br>
 
 
@@ -39,7 +43,7 @@
     <br>
     <%= hidden_field_tag "list_id", @list.id %>
    
-    <%= f.submit "Add Private Photo"%>
+    <%= f.submit "Add Your Trip Photo"%>
     <%= f.text_field :link, placeholder:"Photo Link" %>
 <% end %>
 

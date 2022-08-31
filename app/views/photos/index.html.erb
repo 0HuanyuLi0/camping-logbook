@@ -1,2 +1,12 @@
-<h1>Photos#index</h1>
-<p>Find me in app/views/photos/index.html.erb</p>
+<h2>Welcome, Admin</h2>
+
+<ul>
+    <% @photos.each do |photo| %>
+        <%= link_to photo.link, photo_path(photo) %>
+        <br>
+        <%= link_to "Delete", photo_path(photo),method:"delete" %>
+        <br><br>
+    <% end %>
+
+
+</ul>

@@ -1,19 +1,24 @@
 
 
 <h2><%= @site.name %></h2>
-
-<% if @current_user.present? %>
-    <%= link_to "Edit", edit_site_path(@site) %>
-
-    <% if @current_user.name == "admin" %>
-    |
-    <%= link_to "Delete", site_path(@site.id), method:'delete' %>
+<% if @site.user.present? %>
+    <em>Created by: <%= @site.user.name %></em>
     <br>
+<% end %>
+<% if @current_user.present? %>
+    <% if @current_user == @site.user || @current_user.isAdmin %>
+        <%= link_to "Edit", edit_site_path(@site) %>
+    <% end %>
 
+    <% if @current_user.isAdmin %>
+        <%= link_to "Delete", site_path(@site),method:"delete" %>
     <% end %>
 <% end %>
 
-<br>
+<% if flash[:error] %>
+    <strong class="error"><%= flash[:error] %></strong>
+<% end %>
+
 
 <div class="site_info">
     <strong>Name:</strong>
@@ -55,19 +60,13 @@
     <p><%= @site.description %></p>
 </div>
 
-
 <% if @site.photos.present? %>
-
     <div class="site_info">
         <strong>Photos:</strong>
         <ul>
             <% @site.photos.each do |photo|%>
-                
-             
                 <% if photo.isPublic %>
-              
                 <li><%= image_tag photo.link, alt:photo.name, class:"site_photo"%></li>
-
                 <% end %>
             <% end %>
         </ul>
@@ -85,9 +84,14 @@
                 By: <%= review.user.name %>
                 <br>
                 <em>
-                on: <%= review.updated_at.strftime("%D") %>
-                
+                on: <%= review.updated_at.strftime("%d-%m-%y") %>
                 </em>
+                <br>
+                <% if @current_user.present? && @current_user.id == review.user_id %>
+                    <%= link_to "Edit", edit_review_path(review) %>
+                    |
+                    <%= link_to "Delete", review_path(review), method:"delete" %>
+                <% end %>
                 <br>
                 Score: <%= review.score %>
                 <br>
@@ -99,61 +103,15 @@
 
 <% end %>
 
-<hr>
-<h3>Post New Review</h3>
-
-    <% if !@current_user.present? %>
+<% if !@current_user.present? %>
+    <hr>    
         <strong style="color:red">Please Login to post the review, and add your private photos and story </strong>
-    <% end %>
-
-<%= form_with model:@reviews, local: true do |f| %>
-
-    <%= hidden_field_tag "site_id", @site.id %>
-
-    <%= f.label :score %>
-    <br>
-    <%= f.number_field :score , in: 0.5..5, step:0.5, disabled: !@current_user.present?%>
-    <br><br>
-
-    <%= f.label :comment %>
-    <br>
-    <%= f.text_area :comment,disabled: !@current_user.present? %>
-    <br><br>
-
-    <%= f.submit disabled: !@current_user.present? %>
 <% end %>
 
 <% if @current_user.present? %>
-    <hr>
-    Your Private Photos:
-    <ul>
-        <% @site.photos.each do |photo| %>
-
-            <% if photo.user_id == @current_user.id %>
-                <li>
-                    <%= image_tag photo.link, alt:photo.name, class:"site_photo"%>
-                    <%= link_to "Delete", photo_path(photo.id), method:"delete" %>
-                </li>
-            <% end %>
-
-        <% end%>
-    </ul>
-
-    <%= form_with model:@photo, local: true do |f| %>
-
-        <%= hidden_field_tag "site_id", @site.id %>
-
-        <%= f.label :link, "Photo Link"%>
-        <br>
-        <%= f.text_field :link %>
-        <br><br>
-        <%= f.submit %>
-
-    <% end %>
-
-<% end %>
-
-
-
+<hr>
+<%= render partial: 'show_review' %>
+<%= render partial: 'show_photo' %>
 <%= render partial: 'story' %>
 
+<% end %>

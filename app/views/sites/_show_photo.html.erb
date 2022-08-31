@@ -1,0 +1,34 @@
+
+
+
+    <hr>
+    Your Private Photos:
+    <ul>
+        <% @site.photos.each do |photo| %>
+
+            <% if photo.user_id == @current_user.id && !photo.isPublic%>
+                <li>
+                    <%= image_tag photo.link, alt:photo.name, class:"site_photo"%>
+                    <%= link_to "Delete", photo_path(photo.id), method:"delete" %>
+                </li>
+            <% end %>
+
+        <% end%>
+    </ul>
+
+    <input type="button" value="Add Private Photo" class="show_form" id="photo_form">
+
+    <div id="show_photo_form" style="display:none">
+        <br>
+        <%= form_with model:@photo, local: true do |f| %>
+
+            <%= hidden_field_tag "site_id", @site.id %>
+
+            <%= f.text_field :link, placeholder:"Photo Link" %>
+            <br><br>
+            <%= f.submit "Upload Photo" %>
+
+        <% end %>
+    </div>
+    
+

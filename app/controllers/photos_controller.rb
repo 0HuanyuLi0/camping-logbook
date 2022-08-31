@@ -1,4 +1,8 @@
 class PhotosController < ApplicationController
+
+  before_action :check_if_logged_in
+  before_action :check_if_admin,only:[:index,:show]
+
   def new
   end
 
@@ -22,9 +26,11 @@ class PhotosController < ApplicationController
   end
 
   def index
+    @photos=Photo.all
   end
 
   def show
+    @photo = Photo.find params[:id]
   end
 
   def edit
@@ -35,6 +41,7 @@ class PhotosController < ApplicationController
 
   def destroy
     photo = Photo.find params[:id]
+    check_is_owner(photo)
     site_id = photo.site_id
     list_id = photo.list_id
     Photo.destroy params[:id]

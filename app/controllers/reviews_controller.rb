@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+  before_action :check_if_logged_in
   def new
   end
 
@@ -13,7 +14,7 @@ class ReviewsController < ApplicationController
     else 
       render :new
     end
-    
+
   end
 
   def index
@@ -23,12 +24,25 @@ class ReviewsController < ApplicationController
   end
 
   def edit
+    @review = Review.find params[:id]
+    unless @review.user_id == @current_user.id
+      redirect_to site_path(@review.site_id)
+    end
   end
 
   def update
+    @review = Review.find params[:id]
+    @review.update review_params
+    redirect_to site_path(@review.site)
   end
 
   def destroy
+    @review = Review.find params[:id]
+    unless @review.user_id == @current_user.id
+      redirect_to site_path(@review.site_id)
+    end
+    Review.destroy params[:id]
+    redirect_to site_path(@review.site)
   end
 
   private

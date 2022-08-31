@@ -1,2 +1,22 @@
-<h1>Stories#show</h1>
-<p>Find me in app/views/stories/show.html.erb</p>
+
+Title:
+<%= @story.title %>
+<br>
+Content:
+<%= @story.content %>
+<br>
+
+<% if @story.list.present? %>
+<%= @story.list.title %>
+<br>
+<% end %>
+
+<% if @story.site.present? %>
+<%= @story.site.name %>
+<br>
+<% end %>
+
+
+<%= @story.user.email %>
+<br>
+<%= link_to "Delete", story_path(@story) %>

@@ -7,8 +7,9 @@ class User < ApplicationRecord
     has_secure_password
 
     has_many :lists,:dependent => :destroy
-    has_many :photos,:dependent => :destroy
-    has_many :reviews,:dependent => :destroy
+    has_many :photos
+    has_many :reviews
     has_many :stories,:dependent => :destroy
+    has_many :sites
 
 end
