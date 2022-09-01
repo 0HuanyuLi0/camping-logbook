@@ -1,41 +1,45 @@
 
 
 
-    <hr>
-
-    <ul>
+ 
+  
+    <h4>Your Parivate Photos:</h4>
+    <div class="up-photos">
+        <ul class="list">
         <% @site.photos.each do |photo| %>
 
             <% if photo.user_id == @current_user.id && !photo.isPublic%>
                 <li>
                     <%= cl_image_tag(photo.link, :width => 600, :class => "site_photo") %>
-                    <%= link_to "Delete", photo_path(photo.id), method:"delete" %>
+                    <%= link_to "delete", photo_path(photo.id), method:"delete", class:"material-symbols-outlined" %>
                 </li>
             <% end %>
 
         <% end%>
     </ul>
+    
+    </div>
+    
 
     
     
 
-        <%= form_with model:@photo, local: true, html:{multipart:true} do |f| %>
+        <%= form_with model:@photo, local: true, html:{multipart:true},class:"site_info" do |f| %>
     
             <%= hidden_field_tag "site_id", @site.id %>
 
-            <%= f.label :isPublic,"Upload photos?" %>
-            <br>
+            <h4>Upload Photos</h4>
+            
             <%= f.select :isPublic, [["Public",true],["Private",false]],selected:false %>
-            <br><br>
+           
            <button type="button" id="upload">Select Photos</button>
-            <br><br>
+            <br>
             <% if flash.present? %>
                 <strong class="error"><%= flash[:error] %></strong><br>
             <% end %>
             <div id="files"></div>
-            <br>
 
-            <%= f.submit "Upload"%>
+            <%= f.submit "Upload", class:"sub"%>
 
         <% end %>
   

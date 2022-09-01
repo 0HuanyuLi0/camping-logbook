@@ -2,48 +2,55 @@
 
 <% if @list.stories.present? %>
    <hr>
-    <h3>Your Trip Story</h3>
+    <h4>Your Trip Story</h4>
 
     <ul>
         <% @list.stories.each do |story| %>
             <li>
-            <strong>Title:</strong>
+            <em>Title:</em>
             <%= story.title %>
+            <em>
+                 <span class="material-symbols-outlined filled">calendar_month</span><%= story.updated_at.strftime("%d-%m-%y") %>
+                </em>
             <br>
-            <strong>Content:</strong>
-            <%= story.content %>
-            <br>
-            <%= link_to "Edit", edit_story_path(story.id) %>
+            <em>Content:</em>
+            <%= simple_format(story.content) %>
+            
+            <%= link_to "edit", edit_story_path(story.id), class:"material-symbols-outlined" %>
             |
-            <%= link_to "Delete", story_path(story.id),method:"delete" %>
+            <%= link_to "delete", story_path(story.id),method:"delete", class:"material-symbols-outlined" %>
             <br><br>
             </li>
         <% end %>
     </ul>
 <% end %>
 
-
+<br>
 <hr>
 
-<input type="button" value="Add Private Trip Story" class="show_form" id="list_story_form">
+<input type="button" value="Add Your Trip Story" class="show_form" id="list_story_form">
 
 <div id="show_list_story_form" style="display:none">
-<%= form_with model:@story, local:true do |f| %>
+<%= form_with model:@story, local:true, class:"container" do |f| %>
 
 <h4>Add New Story</h4>
     <%= hidden_field_tag "list_id", @list.id %>
-
+    <div>
     <%= f.label :title %>
     <br>
     <%= f.text_field :title %>
     <br><br>
-
+    </div>
+    
+    <div>
     <%= f.label :content %>
     <br>
     <%= f.text_area :content %>
     <br><br>
+    </div>
+    
 
-    <%= f.submit %>
+    <%= f.submit class:"sub"%>
 
 <% end %>
 

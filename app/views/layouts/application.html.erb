@@ -11,6 +11,8 @@
   
     <%= cloudinary_js_config %>
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
     <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript">  
     </script>
    
@@ -25,7 +27,7 @@
       <% if @current_user.present? %>
         Welcome, <%= @current_user.name %>
         |
-        <%= link_to "Logout", login_path,method:"delete"  %>
+        <%= link_to "logout", login_path,method:"delete", class:"material-symbols-outlined"  %>
         |
         <% if @current_user.isAdmin %>
         <%= link_to "All Users", users_path %>
@@ -42,17 +44,17 @@
         <%= link_to "Login", login_path  %>
         |
         <%= link_to "Sign Up", new_user_path %>
+        |
       <% end %>
       <br>
 
       <%= link_to "Home", root_path %>
       |
-      <%= link_to "All Camping sites", sites_path %>
-      |
       <% if @current_user.present? %>
       <%= link_to "Add Camping sites", new_site_path %>
       |
       <%= link_to "My Lists", lists_path %>
+      |
       <% end %>
       </nav>
       <hr>

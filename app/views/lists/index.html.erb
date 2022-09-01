@@ -2,21 +2,26 @@
 
 <h2>Welcome, <%= @current_user.name %></h2>
 
-[<%= link_to "New List", new_list_path %>]
-
 <ul>
     <% @lists.each do |list| %>
-    <li>
-        <%= link_to list.title, list_path(list.id) %>
-        <br>
+    <li class="lists">
 
+        <%= link_to list.title, list_path(list.id) %>
+        
+        <%= link_to "delete", list_path(list),method:"delete",class:"material-symbols-outlined delete_icon" %>
+        
+        <em>
+        <p>Note: </p>
         <%= simple_format(list.note) %>
-        <% if @current_user.isAdmin %>
+        
+        </em>
+        
         <br>
-        <%= link_to "Delete", list_path(list),method:"delete" %>
-        <br><br>
-        <% end %>
+        
+
     </li>
 
     <% end %>
 </ul>
+
+Create New List: <%= link_to "add_box", new_list_path, class:"material-symbols-outlined" %>

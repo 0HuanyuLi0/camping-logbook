@@ -1,0 +1,37 @@
+
+
+<% if @list.photos.present? %>
+<hr>
+<h4>Your Trip Photos</h4>
+<div class="up-photos">
+        <ul class="list">
+    <% @list.photos.each do |photo| %>
+        <li>
+            
+            <%= cl_image_tag(photo.link, :width => 600, :class => "site_photo") %>
+
+            <%= link_to "delete", photo_path(photo.id), method:"delete",class:"material-symbols-outlined" %>
+        </li>
+    <% end %>
+<% end %>
+</ul>
+    
+</div>
+
+<%= form_with model:@photo, local:true, html:{multipart:true}, id:"ff",class:"site_info" do |f| %>
+    <br>
+    <%= hidden_field_tag "list_id", @list.id %>
+    <%= f.hidden_field :isPublic, :value=>false %>
+    <hr>
+    <h4>Add Your Trip Photos</h4>
+    
+    <button type="button" id="upload">Select Photos</button>
+    <br><br>
+    <% if flash.present? %>
+       <strong class="error"><%= flash[:error] %></strong><br>
+    <% end %>
+    <div id="files"></div>
+
+    <%= f.submit "Upload", class:"sub"%>
+    
+<% end %>

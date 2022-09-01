@@ -1,5 +1,8 @@
 
-<%= form_with model:@site, local: true, html:{multipart:true} do |f| %>
+
+<div class="container">
+
+    <%= form_with model:@site, local: true, html:{multipart:true}, class:"new_site_form" do |f| %>
 
 <div class="site_form">
     <%= f.label :name %>
@@ -58,13 +61,13 @@
 </div>
 
 <% if @site.photos.present? %>
-    <ul>
+    <ul class="list">
         <% @site.photos.each do |photo| %>
         <% if photo.isPublic %>
             <li>
                 <%= cl_image_tag(photo.link, :width => 600, :class => "list_photo") %>
                 <br>
-                <%= link_to "Delete", photo_path(photo.id), method:"delete" %>
+                <%= link_to "delete", photo_path(photo.id), method:"delete",class:"material-symbols-outlined" %>
                 <br>
             </li>
         <% end %>
@@ -87,10 +90,13 @@
 <br>
 
 
-<%= f.submit  %>
+<%= f.submit class:"sub" %>
 
 
 
 <% end %>
+
+</div>
+
 
 

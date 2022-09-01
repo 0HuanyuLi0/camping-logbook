@@ -51,7 +51,18 @@ class SitesController < ApplicationController
     @reviews = Review.new
     @photo = Photo.new
     @story = Story.new
+    if @current_user.present?
+      lists = @current_user.lists
+    @isListed = "material-symbols-outlined star"
+
+    lists.each do |list|
+      if list.sites.include?(@site)
+        @isListed = "material-symbols-outlined star filled"
+      end
+    end
+    end
     
+
   end
 
   def edit
@@ -127,6 +138,8 @@ class SitesController < ApplicationController
     redirect_to site_path(site)
 
   end
+
+  
 
   private
   def site_params

@@ -2,3 +2,12 @@
 <h1>
 Welcome to Camping Logbook
 </h1>
+
+
+<%= form_with model:@page, local:true, class:"container" do |f| %>
+
+<h3>Search Camping Site</h3>
+    <%= f.text_field :search %>
+    <%= f.submit "Search"%>
+
+<% end %>

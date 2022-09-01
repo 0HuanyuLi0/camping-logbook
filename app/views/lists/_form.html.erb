@@ -1,23 +1,25 @@
 
 
 <%= form_with model:@list, local: true do |f| %>
-
-<div>
+<div class="container">
+    <div>
     <%= f.label :title %>
     <br>
     <%= f.text_field :title %>
     <br><br>
-</div>
+    </div>
 
-<div>
+    <div>
     <%= f.label :note %>
     <br>
     <%= f.text_area :note %>
     <br><br>
+    </div>
 </div>
 
 
-<ul>
+
+<ul class="list" id="list_form_ul">
     <% Site.all.each do |site|  %>
 
     <li>
@@ -28,6 +30,6 @@
     
 </ul>
 
-<%= f.submit %>
+<%= f.submit class:"sub", id:"list_btn"%>
 
 <% end %>

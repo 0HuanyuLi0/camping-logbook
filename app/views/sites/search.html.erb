@@ -10,9 +10,22 @@
 <% end %>
 
 
+    <% if @rlts.present? %>
+        <ul class="container">
+        <% @rlts.each do |r|%>
+            <li>
+
+        <%= link_to r.name, site_path(r) %>
+
+             </li>
+        <% end %>
+        </ul>
+    <% else%>
+    <h6>No Result!</h6> 
+    <% end %>
   
 
-<ul class="container">
+<ul>
 
     <% @sites.each do |site| %>
         <li>
@@ -24,5 +37,3 @@
     <% end %>
 
 </ul>
-
-<%= cl_image_tag("https://res.cloudinary.com/huanyuli/image/upload/v1662047572/CampingSites/pk39cfv27onm8yme5b9w.jpg",:width => 600, :class=>"home_photo")%>

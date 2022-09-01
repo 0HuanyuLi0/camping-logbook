@@ -1,0 +1,27 @@
+
+
+<%= form_with model:@page, local:true, class:"container" do |f| %>
+
+<h3>Search Camping Site</h3>
+    <%= f.text_field :search %>
+    <%= f.submit "Search"%>
+
+<% end %>
+
+
+    <% if @rlts.present? %>
+        <ul class="container">
+        <% @rlts.each do |r|%>
+            <li>
+
+        <%= link_to r.name, site_path(r) %>
+
+             </li>
+        <% end %>
+        </ul>
+    <% else%>
+    <h6>No Result!</h6> 
+    <% end %>
+  
+
+

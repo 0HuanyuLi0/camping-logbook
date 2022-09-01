@@ -3,7 +3,7 @@
 
 <%= form_with url:add_to_list_path, local:true do |f| %>
 
-    <ul>
+    <ul class="container">
     <% @lists.each do |list|%>
     
         <li>
@@ -12,11 +12,11 @@
         </li>
 
     <% end %>
+    <li><%= link_to "add_box", new_list_path, class:"material-symbols-outlined" %>Create a New List</li>
     </ul>
 
-    <%= f.submit "Add" %>
+    <%= f.submit "Submit" ,class:"sub", id:"list_btn" %>
 
 
 <% end %>
 <br>
-<%= link_to "Create New List", new_list_path %>

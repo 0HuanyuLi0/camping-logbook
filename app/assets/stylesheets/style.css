@@ -1,11 +1,20 @@
 
+*{
+    box-sizing: border-box;
+    font-family:Arial, Helvetica, sans-serif;
+    background-color: #002B5B;
+    color:wheat
+    /* border: 1px solid red; */
+}
+
+
 
 .site_info p{
     display: inline;
     margin-left: 5px;
 }
 
-.site_photo{
+.site_photo, .list_photo{
     width: 80vw;
     max-width:400px ;
 }
@@ -17,3 +26,211 @@
 .error{
     color: red;
 }
+
+header{
+    width: 80vw;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: right;
+    
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: #54BAB9;
+}
+
+footer{
+    text-align: center;
+}
+
+em{
+    font-size: small;
+}
+
+input,textarea{
+    width: 60vw ;
+    max-width: 500px;
+    background-color: antiquewhite;
+    color: black;
+}
+
+main, footer{
+    width: 80vw;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.title, .star{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 50px;
+}
+
+.site_info{
+    line-height: 150%;
+}
+
+.map{
+    text-align: center;
+}
+
+.map iframe{
+    width: 60vw;
+    max-width: 500px;
+    aspect-ratio: 4/3;
+}
+
+.site_info ul, .list{
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+.site_info_photo, .up-photos{
+    position: relative;
+}
+
+.photo ul a, .up-photos a{
+    position: absolute;
+    opacity: 0.3;
+}
+
+.site_info ul a:hover, .up-photos a:hover{
+    opacity: 1;
+}
+
+.material-symbols-outlined{
+    vertical-align: middle;
+}
+
+.material-symbols-outlined:hover, .filled{
+    font-variation-settings: 
+        'FILL' 1
+    !important;
+}
+
+.review{
+    border-bottom: 5px dotted wheat;
+    text-align: left;
+    
+}
+
+.author{
+    text-align: left;
+    font-size: 80%;
+}
+
+
+.review span, .author a{
+
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.comment{
+    margin-left: 25px;
+}
+
+input[type=button], input[type=submit] {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    /* font-size: 16px; */
+    margin: 4px 2px;
+    cursor: pointer;
+    width: auto;
+}
+
+textarea{
+    aspect-ratio: 3/1;
+}
+
+.new_site_form{
+    margin: 0 auto;
+}
+  
+  
+.sub{
+    background-color: red !important
+}
+
+#review_form, #story_form, #list_story_form{
+    display: block;
+    margin: 0 auto;
+    width: 280px;
+}
+
+
+
+.lists .delete_icon {
+    margin-left: 50px;
+    font-variation-settings: 'opsz' 20;
+}
+
+p{
+    margin: 0;
+}
+
+
+.container, #list_form_ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+input[type=checkbox]{
+    width: auto;
+}
+
+#list_form_ul li{
+    width: 60vw;
+    max-width: 500px;
+    text-align: left;
+}
+
+#list_btn{
+    display: block;
+    margin: 0 auto;
+}
+
+.t_ctr{
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+#site_review, .container li, .site_info{
+    width: 60vw;
+    max-width: 800px;
+}
+
+h6{
+    text-align: center;
+}
+
+.home_photo{
+    display: block;
+    margin: 0 auto;
+}
+
+
+
+
+
+

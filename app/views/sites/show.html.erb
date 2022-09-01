@@ -1,7 +1,10 @@
 
 
-<h2><%= @site.name %></h2>
-<%= link_to "Add to My List", add_to_list_path %>
+<h2 class="title"><%= @site.name %></h2>
+<% if @current_user.present? %>
+
+<%= link_to "star", add_to_list_path, class:@isListed%>
+<% end %>
 <br>
 <% if @site.user.present? %>
     <em>Created by: <%= @site.user.name %></em>
@@ -9,20 +12,21 @@
 <% end %>
 <% if @current_user.present? %>
     <% if @current_user == @site.user || @current_user.isAdmin %>
-        <%= link_to "Edit", edit_site_path(@site) %>
+        <%= link_to "edit", edit_site_path(@site), class:"material-symbols-outlined" %>
     <% end %>
 
     <% if @current_user.isAdmin %>
-        <%= link_to "Delete", site_path(@site),method:"delete" %>
+        <%= link_to "delete", site_path(@site),method:"delete",class:"material-symbols-outlined" %>
     <% end %>
 <% end %>
 
 <% if flash[:error] %>
+    <br>
     <strong class="error"><%= flash[:error] %></strong>
 <% end %>
 
-
-<div class="site_info">
+<div class="container">
+    <div class="site_info">
     <strong>Name:</strong>
     <p><%= @site.name %></p>
 </div>
@@ -62,56 +66,74 @@
     <p><%= simple_format(@site.description) %></p>
 </div>
 
-<div class="map">
-<strong>Map:</strong>
-<br>
-<iframe src="https://www.google.com/maps/embed/v1/place?key=<%= ENV['MAP_API'] %>
-    &q=<%= @site.name %>" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
+<div class="site_info">
+    <strong>Map:</strong>
+    <div class="map">
+     <iframe src="https://www.google.com/maps/embed/v1/place?key=<%= ENV['MAP_API'] %>
+    &q=<%= @site.name %>" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    
 </div>
 
-<% if @site.photos.present? %>
-    <div class="site_info">
+<div class="site_info photo">
+    <% if @site.photos.present? %>
         <strong>Photos:</strong>
         <ul>
             <% @site.photos.each do |photo|%>
                 <% if photo.isPublic %>
                 <li>
+    <div class="site_info_photo">
                 <%= cl_image_tag(photo.link, :width => 600, :class => "site_photo") %>
                 <% if @current_user == photo.user %>
-                    <%= link_to "Delete", photo_path(photo),method:"delete" %>
+                    <%= link_to "delete", photo_path(photo),method:"delete",class:"material-symbols-outlined" %>
                 <% end %>
+    </div>
+    
                </li>
                 <% end %>
             <% end %>
         </ul>
-    </div>
-<% end %>
+    <% end %>
+</div>
+</div>
+
+
 
 
 <% if @site.reviews.present? %>
 <hr>
-    <div class="site_info">
+    <div>
         <strong>Reviews:</strong>
-        <ul>
+        <ul class="container">
             <% @site.reviews.each do |review|%>
-                <li>
+            <div id="site_review">
+                <li class="review">
+                <div class="author">
                 By: <%= review.user.name %>
-                <br>
+                
                 <em>
-                on: <%= review.updated_at.strftime("%d-%m-%y") %>
+                 <span class="material-symbols-outlined filled">calendar_month</span><%= review.updated_at.strftime("%d-%m-%y") %>
                 </em>
-                <br>
                 <% if @current_user.present? && @current_user.id == review.user_id %>
-                    <%= link_to "Edit", edit_review_path(review) %>
+                    
+                        <%= link_to "edit", edit_review_path(review), class:"material-symbols-outlined" %>
                     |
-                    <%= link_to "Delete", review_path(review), method:"delete" %>
+                    <%= link_to "delete", review_path(review), method:"delete",class:"material-symbols-outlined" %>
+                   
+                    
                 <% end %>
-                <br>
+                </div>
+                
+                
+             
                 Score: <%= review.score %>
                 <br>
-                Comment: <%= simple_format(review.comment) %>
+                Comment:<div class="comment"><%= simple_format(review.comment) %>
+                </div>
                 </li>
+            
+            </div>
+                
             <% end %>
         </ul>
     </div>
@@ -120,13 +142,15 @@
 
 <% if !@current_user.present? %>
     <hr>    
-        <strong style="color:red">Please Login to post the review, and add your private photos and story </strong>
+        <strong style="color:red">Please Login to share your story </strong>
 <% end %>
 
 <% if @current_user.present? %>
-<hr>
+
 <%= render partial: 'show_review' %>
-<%= render partial: 'show_photo' %>
+<hr>
 <%= render partial: 'story' %>
+<hr>
+<%= render partial: 'show_photo' %>
 
 <% end %>

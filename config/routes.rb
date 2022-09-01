@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
 
 
-  root to: 'pages#home'
+  root to: 'sites#index'
 
   get '/login' => 'session#new'
   post '/login' => 'session#create'
@@ -13,5 +13,8 @@ Rails.application.routes.draw do
   get '/sites/:id/add_to_list' => 'sites#add_to_list', as:'add_to_list'
 
   post '/sites/:id/add_to_list' => 'sites#add_to_list_create'
+
+  # post '/' => 'pages#search'
+  post '/search' => "pages#search"
 
 end

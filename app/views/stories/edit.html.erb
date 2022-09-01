@@ -1,18 +1,30 @@
 
+<% if @story.site.present? %>
+<h2><%= @story.site.name %></h2>
+<% end %>
 
-<h2><%= @story.title %></h2>
+<% if @story.list.present? %>
+<h2><%= @story.list.title %></h2>
+<% end %>
 
-<%= form_with model:@story, local:true do |f| %>
 
-    <%= f.label :title %>
-    <br>
-    <%= f.text_field :title %>
-    <br><br>
+<em class="t_ctr">Your Story</em>
 
-    <%= f.label :content %>
-    <br>
-    <%= f.text_area :content %>
-    <br><br>
+<%= form_with model:@story, local:true, class:"container" do |f| %>
+    <div>
+        <%= f.label :title %>
+        <br>
+        <%= f.text_field :title %>
+        <br><br>
+    </div>
+    
+    <div>
+        <%= f.label :content %>
+        <br>
+        <%= f.text_area :content %>
+        <br><br>
+    </div>
+    
 
-    <%= f.submit %>
+    <%= f.submit class:"sub"%>
 <% end %>

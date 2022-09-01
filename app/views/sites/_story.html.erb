@@ -1,22 +1,24 @@
 
 
 <% if @site.stories.present? %>
-    <hr>
-    <h3>Your Trip Story</h3>
-
-    <ul>
+    
+    <h4>Your Trip Story:</h4>
+    <ul class="container">
         <% @site.stories.each do |story| %>
             <% if story.user_id == @current_user.id%>
-            <li>
+            <li class="container_li">
                 <strong>Title:</strong>
                 <%= story.title %>
+                <em>
+                 <span class="material-symbols-outlined filled">calendar_month</span><%= story.updated_at.strftime("%d-%m-%y") %>
+                </em>
                 <br>
                 <strong>Content:</strong>
-                <%= story.content %>
-                <br>
-                <%= link_to "Edit", edit_story_path(story.id) %>
+                <%= simple_format(story.content) %>
+              
+                <%= link_to "edit", edit_story_path(story.id), class:"material-symbols-outlined" %>
                 |
-                <%= link_to "Delete", story_path(story.id),method:"delete" %>
+                <%= link_to "delete", story_path(story.id),method:"delete",class:"material-symbols-outlined" %>
                 <br><br>
             </li>
             <% end %>
@@ -25,27 +27,31 @@
 <% end %>
 
 <br>
-<hr>
+
  <input type="button" value="Add Private Story" class="show_form" id="story_form">
 
  <div id="show_story_form" style="display:none">
-    <hr>
+ 
     <h4>Add New Story</h4>
-    <%= form_with model:@story, local:true do |f| %>
+    <%= form_with model:@story, local:true, class:"container" do |f| %>
 
         <%= hidden_field_tag "site_id", @site.id %>
+        <div>
+            <%= f.label :title %>
+            <br>
+            <%= f.text_field :title, required:true %>
+            <br><br>
+        </div>
+        
+        <div>
+            <%= f.label :content %>
+            <br>
+            <%= f.text_area :content,required:true %>
+            <br><br>
+        </div>
+        
 
-        <%= f.label :title %>
-        <br>
-        <%= f.text_field :title %>
-        <br><br>
-
-        <%= f.label :content %>
-        <br>
-        <%= f.text_area :content %>
-        <br><br>
-
-        <%= f.submit %>
+        <%= f.submit class:"sub" %>
 
     <% end %>
  

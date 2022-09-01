@@ -20,7 +20,7 @@ class ListsController < ApplicationController
     end
 
     if @list.save
-      redirect_to @list
+      redirect_to lists_path
     else
       render :new
     end
