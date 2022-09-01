@@ -13,7 +13,7 @@ $(function () {
     })
 
     $(".show_form").on("click",function(target){
-        $("#show_"+target.currentTarget.id).show()
+        $("#show_"+target.currentTarget.id).toggle()
     })
 
  
@@ -22,16 +22,21 @@ $(function () {
         uploadPreset: 'y3prair4', folder: 'CampingSites'}, (error, result) => { 
           if (!error && result && result.event === "success") { 
             console.log('Done! Here is the image info: ', result.info);
-            $('#ff').append(
-                `<input type="hidden" name="cloud[]" value="${result.info.url}" />`
+            $('#files').append(
+                `Photo: <input type="text" name="cloud[]" value="${result.info.url}" readonly/><br>`
             )
             }
           }
       )
+    
+      $("#upload").on("click",function(){
+        myWidget.open();
+      });
       
-    document.getElementById("upload").addEventListener("click", function(){
-          myWidget.open();
-        }, false);
+    // document.getElementById("upload").addEventListener("click", function(){
+    //       myWidget.open();
+    //     }, false);
 
+   
 })
 

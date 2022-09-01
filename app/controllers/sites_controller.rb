@@ -5,23 +5,33 @@ class SitesController < ApplicationController
 
   def new
     @site = Site.new
+  
   end
 
   def create
-
+  
     @site = Site.new site_params
     @site.user_id = @current_user.id
     @site.save
 
-    if params[:photo_links].present?
-      params[:photo_links].each do |link|
-        Photo.create(
-          link:link,
-          site_id:@site.id,
-          isPublic:true
-        )
+    # photo
+    links = params[:cloud]
+    if links.present?
+
+      links.each do |lk|
+
+        photo = Photo.new
+        photo.link = lk
+        photo.user_id = @current_user.id
+        photo.site_id = @site.id
+        photo.isPublic = true
+        photo.save
+      
       end
+
     end
+
+    
 
     if @site.persisted?
       redirect_to @site
@@ -41,6 +51,7 @@ class SitesController < ApplicationController
     @reviews = Review.new
     @photo = Photo.new
     @story = Story.new
+    
   end
 
   def edit
@@ -54,40 +65,21 @@ class SitesController < ApplicationController
     check_is_owner( @site )
     @site.update site_params
     
+    links = params[:cloud]
+    if links.present?
 
-    if params[:photos].present?
-      # raise "hell"
-      params[:photos].keys.each do |key|
-          p = Photo.find_by id: key
-          if params[:photos][key].present?
-            p.update(
-              link: params[:photos][key],
-              isPublic:true
-            )
-          else
-            p.destroy
-          end
+      links.each do |lk|
+
+        photo = Photo.new
+        photo.link = lk
+        photo.user_id = @current_user.id
+        photo.site_id = @site.id
+        photo.isPublic = true
+        photo.save
+      
       end
+
     end
-
-    if params[:photo_links].present?
-      # raise "hell"
-      params[:photo_links].each do |p_link|
-        @ph = Photo.create(
-          link:p_link,
-          site_id:@site.id,
-          user_id:@current_user.id,
-          isPublic:true
-        )
-
-        unless @ph.persisted?
-          return render :edit
-        end
-
-      end
-    end
-
-    Photo.where(link:nil).destroy_all
 
     if @site.persisted?
       redirect_to @site
@@ -112,7 +104,7 @@ class SitesController < ApplicationController
 
     site = Site.find_by(id:params[:id])
     lists_id = params[:lists]
-    
+
     all_lists = List.where(user:@current_user)
 
     all_lists.each do |l|

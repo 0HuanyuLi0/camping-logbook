@@ -56,3 +56,5 @@ end
 gem 'pry-rails'
 gem 'jquery-rails'
 gem "cloudinary", "~> 1.23"
+
+gem 'dotenv-rails', :groups => [:development, :test]

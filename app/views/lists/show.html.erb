@@ -44,17 +44,18 @@
 <%= form_with model:@photo, local:true, html:{multipart:true}, id:"ff" do |f| %>
     <br>
     <%= hidden_field_tag "list_id", @list.id %>
-   
-   
-  
     <hr>
     <h3>Add Your Trip Photos</h3>
+    
     <button type="button" id="upload">Select Photos</button>
     <br><br>
-  
-
+    <% if flash.present? %>
+       <strong class="error"><%= flash[:error] %></strong><br>
+    <% end %>
+    <div id="files"></div>
+    <br>
     <%= f.submit "Upload"%>
-    <em>Select photos first, then click 'upload' button to submit form</em>
+    
 <% end %>
 
 <%= render partial: 'story' %>

@@ -9,8 +9,10 @@ class PhotosController < ApplicationController
   def create
     
     links = params[:cloud]
-    # raise
+    
     unless links.present?
+      flash[:error]="No photo uploaded, please 'Select Photos' first, then click 'Upload' button"
+      
       return redirect_back(fallback_location: root_path)
     end
 
@@ -21,8 +23,9 @@ class PhotosController < ApplicationController
       photo.user_id = @current_user.id
       photo.site_id = params[:site_id]
       photo.list_id = params[:list_id]
+      photo.isPublic = params[:photo][:isPublic]
       photo.save
-
+    
     end
   
       redirect_back(fallback_location: root_path)
@@ -51,7 +54,7 @@ class PhotosController < ApplicationController
     Photo.destroy params[:id]
     
     redirect_back(fallback_location: root_path)
-    
+
   end
 
 end

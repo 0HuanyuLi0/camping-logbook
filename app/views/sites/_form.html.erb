@@ -58,32 +58,39 @@
 </div>
 
 <% if @site.photos.present? %>
-
-   <% @site.photos.each do |photo| %>
+    <ul>
+        <% @site.photos.each do |photo| %>
         <% if photo.isPublic %>
-        <%= label_tag "Photo Link" %>
-        <br>
-        <%= text_field_tag "photos[#{photo.id}]", photo.link %>
-        <br><br>
+            <li>
+                <%= cl_image_tag(photo.link, :width => 600, :class => "list_photo") %>
+                <br>
+                <%= link_to "Delete", photo_path(photo.id), method:"delete" %>
+                <br>
+            </li>
         <% end %>
    <% end %>
-  
+    </ul>
 <% end %>
 
 
 <br>
 
-<%= f.file_field :image %>
-
-<button type="button" id="upload_widget">
-        Add Photo link
-</button>
 
 
-   
+<button type="button" id="upload">Select Photos</button>
+
+
 <br><br>
 
-<%= f.submit %>
+
+<div id="files"></div>
+<br>
+
+
+<%= f.submit  %>
+
+
 
 <% end %>
+
 

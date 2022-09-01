@@ -62,13 +62,26 @@
     <p><%= simple_format(@site.description) %></p>
 </div>
 
+<div class="map">
+<strong>Map:</strong>
+<br>
+<iframe src="https://www.google.com/maps/embed/v1/place?key=<%= ENV['MAP_API'] %>
+    &q=<%= @site.name %>" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+</div>
+
 <% if @site.photos.present? %>
     <div class="site_info">
         <strong>Photos:</strong>
         <ul>
             <% @site.photos.each do |photo|%>
                 <% if photo.isPublic %>
-                <li><%= image_tag photo.link, alt:photo.name, class:"site_photo"%></li>
+                <li>
+                <%= cl_image_tag(photo.link, :width => 600, :class => "site_photo") %>
+                <% if @current_user == photo.user %>
+                    <%= link_to "Delete", photo_path(photo),method:"delete" %>
+                <% end %>
+               </li>
                 <% end %>
             <% end %>
         </ul>

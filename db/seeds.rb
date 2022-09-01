@@ -6,6 +6,33 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# =======================
+User.destroy_all
+
+u1 = User.create!(
+    name:'luke',
+    email:'luke.com',
+    password:'abc',
+    isAdmin:false
+)
+
+u2 = User.create!(
+    name:'like',
+    email:'like.com',
+    password:'abc',
+    isAdmin:false
+)
+
+admin = User.create!(
+    name:'admin',
+    email:'admin',
+    password:'abc',
+    isAdmin:true
+)
+
+
+
+# =======================
 Site.destroy_all
 
 port_lincoln = Site.create!(
@@ -47,49 +74,55 @@ Photo.destroy_all
 Photo.create!(
     name:'Autumn',
     date:'2022/05/02',
-    link:'mt/mt_wilson_1.png',
+    link:'https://res.cloudinary.com/huanyuli/image/upload/v1661995382/CampingSites/mt_wilson_1_qsfksy.png',
     site_id:mt_wilson.id,
-    isPublic:true
+    isPublic:true,
+    user_id:admin.id
 )
 
 Photo.create!(
     name:'Spring',
     date:'2022/05/02',
-    link:'mt/mt_wilson_2.png',
+    link:'https://res.cloudinary.com/huanyuli/image/upload/v1661995446/CampingSites/mt_wilson_2_dwnemi.png',
     site_id:mt_wilson.id,
-    isPublic:true
+    isPublic:true,
+    user_id:admin.id
 )
 
 Photo.create!(
     name:'Autumn',
     date:'2022/05/02',
-    link:'mt/mt_wilson_3.png',
+    link:'https://res.cloudinary.com/huanyuli/image/upload/v1661995446/CampingSites/mt_wilson_3_kacn6d.png',
     site_id:mt_wilson.id,
-    isPublic:true
+    isPublic:true,
+    user_id:admin.id
 )
 
 Photo.create!(
     name:'Autumn',
     date:'2022/05/02',
-    link:'mt/mt_wilson_4.png',
+    link:'https://res.cloudinary.com/huanyuli/image/upload/v1661995445/CampingSites/mt_wilson_4_lgz3na.png',
     site_id:mt_wilson.id,
-    isPublic:true
+    isPublic:true,
+    user_id:admin.id
 )
 
 Photo.create!(
     name:'Autumn',
     date:'2022/05/02',
-    link:'wt/wt_beach_1.png',
+    link:'https://res.cloudinary.com/huanyuli/image/upload/v1661995464/CampingSites/wt_beach_1_bvnwyv.png',
     site_id:west_beach.id,
-    isPublic:true
+    isPublic:true,
+    user_id:admin.id
 )
 
 Photo.create!(
     name:'Autumn',
     date:'2022/05/02',
-    link:'wt/wt_beach_2.png',
+    link:'https://res.cloudinary.com/huanyuli/image/upload/v1661995464/CampingSites/wt_beach_2_hzpjfo.png',
     site_id:west_beach.id,
-    isPublic:true
+    isPublic:true,
+    user_id:admin.id
 )
 
 Photo.create!(
@@ -97,7 +130,8 @@ Photo.create!(
     date:'2022/05/02',
     link:'https://www.portlincolntouristpark.com.au/wp-content/uploads/2022/08/7D2A0265-scaled.jpg',
     site_id:port_lincoln.id,
-    isPublic:true
+    isPublic:true,
+    user_id:admin.id
 )
 
 Photo.create!(
@@ -105,33 +139,12 @@ Photo.create!(
     date:'2022/05/02',
     link:'https://www.portlincolntouristpark.com.au/wp-content/uploads/2022/07/waterfrotn-section2-scaled.jpg',
     site_id:port_lincoln.id,
-    isPublic:true
+    isPublic:true,
+    user_id:admin.id
 )
 
 
-# =======================
-User.destroy_all
 
-u1 = User.create!(
-    name:'luke',
-    email:'luke.com',
-    password:'abc',
-    isAdmin:false
-)
-
-u2 = User.create!(
-    name:'like',
-    email:'like.com',
-    password:'abc',
-    isAdmin:false
-)
-
-u3 = User.create!(
-    name:'admin',
-    email:'admin',
-    password:'abc',
-    isAdmin:true
-)
 
 # =====================
 List.destroy_all
@@ -139,13 +152,13 @@ List.destroy_all
 l1 = List.create!(
     title:'Favorite',
     note:'hahaha',
-    user_id:u3.id
+    user_id:admin.id
 )
 
 l2 = List.create!(
     title:'Visted',
     note:'hahaha',
-    user_id:u3.id
+    user_id:admin.id
 )
 
 #=====================
@@ -179,5 +192,6 @@ Story.create!(
     content:"Gooooooooood1",
     list_id:l1.id
 )
+
 
 
