@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   post '/sites/:id/add_to_list' => 'sites#add_to_list_create'
 
-  # post '/' => 'pages#search'
+
   post '/search' => "pages#search"
 
 end
